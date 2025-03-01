@@ -21,7 +21,6 @@ class Config:
         os.makedirs(self.scraped_data_dir, exist_ok=True)
         
         # Set up file paths
-        self.scraped_neighborhoods_file = os.path.join(self.data_dir, 'scraped_neighborhoods.txt')
         self.available_location_queries_file = os.path.join(self.data_dir, 'plaats_provinc_nl.csv')
         self.search_query_file = os.path.join(self.data_dir, 'search_query.json')
         
@@ -67,11 +66,12 @@ class Config:
                 except (json.JSONDecodeError, Exception) as e:
                     continue
         
-        return {clean_name(element) for element in scraped_neighborhoods}
+        return {CleanerUtils.clean_name(element) for element in scraped_neighborhoods}
 
 if __name__ == "__main__":
     config = Config(base_dir=None)
     location_queries = config.load_location_queries()
-    print(location_queries)
+    #print(location_queries)
     scraped_neighborhoods = config.get_scraped_neighborhoods()
     print(scraped_neighborhoods)
+    print(f"query file in {config.search_query_file} \nbase dir is {config.base_dir}")

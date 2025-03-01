@@ -7,7 +7,7 @@ import json
 import time
 from random import randint
 import re
-from utils import CommonFunctions
+from Scraper.utils import CommonFunctions
 
 class Collector:
     """Handles collecting property listings from search results pages"""
@@ -69,7 +69,7 @@ class Collector:
                 for links in valid_results:
                     all_house_links.update(links)
 
-                print(f"Collecting links up to page {page_number + len(valid_results) - 1}")
+                print(f"Collected url links up to page {page_number + len(valid_results) - 1}")
                 page_number += batch_size
 
             except Exception as e:
@@ -83,7 +83,7 @@ async def main():
 
     async with AsyncSession() as session:
         # Define the URL to scrape
-        url = "https://www.funda.nl/zoeken/koop?transaction_type=koop?&selected_area=[%22amsterdam%22]&price=%220-650000%22&object_type=[%22house%22,%22apartment%22]&availability=[%22available%22,%22negotiations%22]&rooms=%222-%22"
+        url = "https://www.funda.nl/zoeken/koop?selected_area=[%22provincie-noord-holland%22]"
         
         # Fetch house links from multiple pages
         house_links = await Collector.fetch_house_links_from_multiple_pages_async(url, session, batch_size=10)

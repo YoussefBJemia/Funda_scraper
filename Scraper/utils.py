@@ -4,6 +4,7 @@ from curl_cffi import requests
 from lxml import html
 import asyncio
 import os
+import ast
 import csv
 import json
 import time
@@ -65,6 +66,19 @@ class CommonFunctions:
         print(f"Skipping URL after {max_retries} retries: {url}")
         return None
 
+    @staticmethod
+    def save_filters_to_json(filters, filename=None):
+        """Save the filter dictionary to a JSON file."""
+        if filename is None:
+            print("Error: No filename provided")
+            return
+
+        try:
+            with open(filename, 'w') as json_file:
+                json.dump(filters, json_file, indent=4)
+            print(f"Filters saved to {filename}")
+        except Exception as e:
+            print(f"Failed to save filters to JSON: {e}")
 
 class QueryUtils:
     @staticmethod
@@ -80,6 +94,7 @@ class QueryUtils:
             dict: Dictionary with area keys and corresponding query lists
         """
         selected_areas = search_query.get('selected_area', None)
+
         if selected_areas is None:
             # Initialize with "All" key
             stack_neighborhoods_queries = {}
@@ -107,27 +122,30 @@ class QueryUtils:
                 # Determine the search type
                 if search_term.startswith("gemeente-"):
                     search_type = "gemeente"
-                    # Extract the actual gemeente name from the search term
                     search_value = search_term.replace("gemeente-", "")
                 elif search_term.startswith("provincie-"):
                     search_type = "provincie"
-                    # Extract the actual provincie name from the search term
                     search_value = search_term.replace("provincie-", "")
                 else:
                     search_type = "plaats"
                     search_value = search_term
                 
-                # Loop through all available location queries
+            for search_term in selected_areas:
+                print(f"Processing search term: {search_term}")
                 for row in available_location_queries:
-                    queries = eval(row["query"]) if isinstance(row["query"], str) and row["query"] != "[]" else row["query"]
-                    
-                    # Match based on search type
+                    print(f"Checking against row: {row}")
                     if search_type == "plaats" and CleanerUtils.clean_name(row["plaats"]) == search_value:
+                        print(f"Match found for {search_term} in plaats")
                         stack_neighborhoods_queries[search_term].extend(queries)
                     elif search_type == "gemeente" and CleanerUtils.clean_name(row["gemeente"]) == search_value:
+                        print(f"Match found for {search_term} in gemeente")
                         stack_neighborhoods_queries[search_term].extend(queries)
                     elif search_type == "provincie" and CleanerUtils.clean_name(row["provincie"]) == search_value:
+                        print(f"Match found for {search_term} in provincie")
                         stack_neighborhoods_queries[search_term].extend(queries)
+
+
+        print(f"stack is {stack_neighborhoods_queries}")
         return stack_neighborhoods_queries
 
 
@@ -415,3 +433,7 @@ class CleanerUtils:
         value = value.replace(" ", "-").replace(".", "")
         value = re.sub(r"[()]", "", value)
         return unicodedata.normalize("NFKD", value).encode("ascii", "ignore").decode("utf-8")
+
+if __name__ == "__main__":
+    cleaner = CleanerUtils.clean_name("Gemeente Noord Holland")
+    print(cleaner)

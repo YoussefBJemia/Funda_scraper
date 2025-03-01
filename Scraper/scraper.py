@@ -7,7 +7,7 @@ import json
 import time
 from random import randint
 import re
-from utils import CommonFunctions, CleanerUtils
+from Scraper.utils import CommonFunctions, CleanerUtils
 
 clean_scraped_record = CleanerUtils.clean_scraped_record
 
@@ -211,7 +211,7 @@ async def main():
     # Initialize the session
     async with AsyncSession() as session:
         # Define the URL of the property listing
-        url = "https://www.funda.nl/detail/koop/amsterdam/appartement-van-spilbergenstraat-77-h/43881691/"
+        url = "https://www.funda.nl/detail/koop/amsterdam/appartement-van-oldenbarneveldtstraat-96-ao/89281062/"
         
         scraper = Scraper()
         

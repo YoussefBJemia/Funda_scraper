@@ -5,7 +5,7 @@ from curl_cffi import requests
 from lxml import html
 import re
 
-from filters import generate_filters, FILTERS
+from Scraper.filters import generate_filters, FILTERS
 
 class UrlBuilder:
     """Handles building and parsing URLs for property searches on Funda"""
@@ -102,14 +102,14 @@ if __name__ == "__main__":
 
     url = UrlBuilder.build_url(
         transaction_type="buy",
-        selected_area="amsterdam",
-        price_min=0,
-        price_max=650000,
-        object_type=["house", "apartment"],
-        availability=["available", "negotiations"],
+        selected_area="provincie-noord-holland",
+        price_min=None,
+        price_max=None,
+        object_type=None,
+        availability=None,
         floor_area_min=None,
         floor_area_max=None,
-        rooms_min=2,
+        rooms_min=None,
         rooms_max=None,
         construction_type = None
     )
