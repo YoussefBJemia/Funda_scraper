@@ -22,7 +22,7 @@
 
 ## 🛠️ Installation
 
-1. **Clone the repository**:
+**Clone the repository**:
 ````
 git clone https://github.com/YoussefBJemia/Funda_scraper
 cd Funda_scraper
@@ -39,4 +39,17 @@ python Funda_scraper/main.py
    ````
    python main.py
    ````
-   
+2. **Start Scraping**
+
+Click the **"Start Scraping"** button in the GUI to begin the process.
+
+The scraper will start running, and you can monitor its progress in the terminal or command line.
+
+![Running Code Screenshot](path/to/your/screenshot) <!-- Replace with actual path -->
+
+3. **Resumable Scraping**
+
+- Ads are saved automatically whenever a neighborhood is fully processed.
+- If the program is stopped, it can resume from where it left off, ensuring no data is lost.
+
+![Resume GUI Screenshot](path/to/your/screenshot) <!-- Replace with actual path -->
