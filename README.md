@@ -24,7 +24,7 @@
 
 1. **Clone the repository**:
 ````
-git clone [text](https://github.com/YoussefBJemia/Funda_scraper)
+git clone https://github.com/YoussefBJemia/Funda_scraper
 cd Funda_scraper
 pip install -r requirements.txt
 python Funda_scraper/main.py
