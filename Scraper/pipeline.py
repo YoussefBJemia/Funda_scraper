@@ -47,7 +47,8 @@ class FundaScraperPipeline:
     async def process_and_save(self, url, session):
         # First, collect all the links
         print("📋 Collecting house listings...")
-        result = await self.collector.fetch_house_links_from_multiple_pages_async(url, session)
+        batch_size = self.config.batch_processing_size
+        result = await self.collector.fetch_house_links_from_multiple_pages_async(url, session, batch_size = batch_size) 
         unscraped_links = list(result)
         print(f"🔍 Found {len(unscraped_links)} listings to process")
         
@@ -56,7 +57,6 @@ class FundaScraperPipeline:
         total_links = len(unscraped_links)
         
         # Process houses in batches, with progress updates
-        batch_size = 10
         scraped_data = []
         
         for i in range(0, total_links, batch_size):

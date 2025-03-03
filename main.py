@@ -1,8 +1,6 @@
 import asyncio
 import sys
 import os
-
-# Import components
 from Interface.interface import show_startup_screen
 from Scraper.pipeline import FundaScraperPipeline
 

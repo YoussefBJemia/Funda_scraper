@@ -24,10 +24,7 @@ class Config:
         self.search_query_file = os.path.join(self.data_dir, 'search_query.json')
 
         # Constants for batch processing and wait time
-        self.batch_processing_size = 10
-
-    def waiting_time_for_scraping(self):
-        return 1 + randint(0,3)
+        self.batch_processing_size = 20
     
     def load_search_query(self):
         """Load search query configuration from file"""
