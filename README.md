@@ -40,18 +40,19 @@ python Funda_scraper/main.py
    python main.py
    ````
    This will launch the Graphical User Interface (GUI).
-   ![Interface Screenshot](Img\interface.PNG)
+
+   ![Interface Screenshot](Img/interface.PNG)
 2. **Start Scraping**
 
 Click the **"Start Scraping"** button in the GUI to begin the process.
 
 The scraper will start running, and you can monitor its progress in the terminal or command line.
 
-![Running Code Screenshot](Img\progress.PNG) <!-- Replace with actual path -->
+![Running Code Screenshot](Img/progress.PNG) <!-- Replace with actual path -->
 
 3. **Resumable Scraping**
 
 - Ads are saved automatically whenever a neighborhood is fully processed.
 - If the program is stopped, it can resume from where it left off, ensuring no data is lost.
 
-![Resume GUI Screenshot](Img\continue.PNG) <!-- Replace with actual path -->
+![Resume GUI Screenshot](Img/continue.PNG) <!-- Replace with actual path -->
