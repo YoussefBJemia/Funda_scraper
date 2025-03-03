@@ -10,14 +10,19 @@ def get_requirements(file_path:str):
             requirements.remove(cst)
         return requirements
         
-
+NAME = "Funda_scraper"
+URL = "https://github.com/YoussefBJemia/Funda_scraper"
+EMAIL = "youssef.benjemia@hotmail.com"
+AUTHOR = "Youssef Ben Jemia"
         
 setup(
-    name='Funda_scraper',
+    name=NAME,
     version='0.0.1',
-    author='YBJ',
+    author=AUTHOR,
+    author_email=EMAIL,
     packages=find_packages(),
     install_requires=get_requirements('requirements.txt'),
+    url = URL,
     entry_points={
         'console_scripts': [
             'funda-scraper = main:main_function',

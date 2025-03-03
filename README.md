@@ -17,3 +17,13 @@
 - **Asynchronous Scraping**: Utilizes `asyncio` for high-performance, concurrent web requests, combined with `curl_cffi` for undetected scraping.
 - **Scraping by Batch**: Control how many ads are processed at once by adjusting `self.batch_processing_size` in `Scraper/config.py`. Increase the number for faster scraping, but be cautious—larger batches may increase the risk of your IP getting blocked.
 - **User-Friendly Interface**: An intuitive interface within the code for easy configuration and execution.
+
+---
+
+## 🛠️ Installation
+
+1. **Clone the repository**:
+git clone https://github.com/YoussefBJemia/Funda_scraper
+cd Funda_scraper
+pip install -r requirements.txt
+python Funda_scraper/main.py
