@@ -94,7 +94,6 @@ class QueryUtils:
             dict: Dictionary with area keys and corresponding query lists
         """
         selected_areas = search_query.get('selected_area', None)
-
         if selected_areas is None:
             # Initialize with "All" key
             stack_neighborhoods_queries = {}
@@ -122,30 +121,27 @@ class QueryUtils:
                 # Determine the search type
                 if search_term.startswith("gemeente-"):
                     search_type = "gemeente"
+                    # Extract the actual gemeente name from the search term
                     search_value = search_term.replace("gemeente-", "")
                 elif search_term.startswith("provincie-"):
                     search_type = "provincie"
+                    # Extract the actual provincie name from the search term
                     search_value = search_term.replace("provincie-", "")
                 else:
                     search_type = "plaats"
                     search_value = search_term
                 
-            for search_term in selected_areas:
-                print(f"Processing search term: {search_term}")
+                # Loop through all available location queries
                 for row in available_location_queries:
-                    print(f"Checking against row: {row}")
+                    queries = eval(row["query"]) if isinstance(row["query"], str) and row["query"] != "[]" else row["query"]
+                    
+                    # Match based on search type
                     if search_type == "plaats" and CleanerUtils.clean_name(row["plaats"]) == search_value:
-                        print(f"Match found for {search_term} in plaats")
                         stack_neighborhoods_queries[search_term].extend(queries)
                     elif search_type == "gemeente" and CleanerUtils.clean_name(row["gemeente"]) == search_value:
-                        print(f"Match found for {search_term} in gemeente")
                         stack_neighborhoods_queries[search_term].extend(queries)
                     elif search_type == "provincie" and CleanerUtils.clean_name(row["provincie"]) == search_value:
-                        print(f"Match found for {search_term} in provincie")
                         stack_neighborhoods_queries[search_term].extend(queries)
-
-
-        print(f"stack is {stack_neighborhoods_queries}")
         return stack_neighborhoods_queries
 
 

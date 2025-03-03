@@ -3,9 +3,8 @@ import os
 import json
 import csv
 import re
+from random import randint
 from Scraper.utils import CleanerUtils
-
-clean_name = CleanerUtils.clean_name
 
 class Config:
     def __init__(self, base_dir=None):
@@ -23,7 +22,13 @@ class Config:
         # Set up file paths
         self.available_location_queries_file = os.path.join(self.data_dir, 'plaats_provinc_nl.csv')
         self.search_query_file = os.path.join(self.data_dir, 'search_query.json')
-        
+
+        # Constants for batch processing and wait time
+        self.batch_processing_size = 10
+
+    def waiting_time_for_scraping(self):
+        return 1 + randint(0,3)
+    
     def load_search_query(self):
         """Load search query configuration from file"""
         try:

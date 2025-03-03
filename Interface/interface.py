@@ -598,18 +598,11 @@ def map_dictionary(filters):
     # Map location values
     if filters.get("locations") and filters["locations"].get("values"):
         if isinstance(filters["locations"]["values"], list):
-            # If it's a list with one item, format accordingly
-            if len(filters["locations"]["values"]) == 1:
-                if filters["locations"]["type"] in ["Gemeente", "Provincie"]:
-                    mapped_params["selected_area"] = clean_name(filters["locations"]["type"] + "-" + filters["locations"]["values"][0])
-                else:
-                    mapped_params["selected_area"] = clean_name(filters["locations"]["values"][0])
+            # Always store as a list, regardless of how many items
+            if filters["locations"]["type"] in ["Gemeente", "Provincie"]:
+                mapped_params["selected_area"] = [clean_name(filters["locations"]["type"] + "-" + value) for value in filters["locations"]["values"]]
             else:
-                # If multiple values, store them as a list with the type prefix applied to each item
-                if filters["locations"]["type"] in ["Gemeente", "Provincie"]:
-                    mapped_params["selected_area"] = [clean_name(filters["locations"]["type"] + "-" + value) for value in filters["locations"]["values"]]
-                else:
-                    mapped_params["selected_area"] = [clean_name(value) for value in filters["locations"]["values"]]
+                mapped_params["selected_area"] = [clean_name(value) for value in filters["locations"]["values"]]
 
     # Map price range
     if filters.get("price"):
@@ -882,9 +875,5 @@ def show_startup_screen():
     return user_choice_continue["value"]
 
 
-
-def main():
-    """Main entry point for the application."""
+if __name__ == "__main__":
     show_startup_screen()
-
-main()

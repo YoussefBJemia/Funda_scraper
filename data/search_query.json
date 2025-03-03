@@ -1,6 +1,8 @@
 {
     "transaction_type": "buy",
-    "selected_area": "provincie-noord-holland",
+    "selected_area": [
+        "provincie-friesland"
+    ],
     "price_min": null,
     "price_max": null,
     "object_type": null,

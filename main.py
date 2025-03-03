@@ -6,9 +6,6 @@ import os
 from Interface.interface import show_startup_screen
 from Scraper.pipeline import FundaScraperPipeline
 
-
-
-
 async def run_pipeline():
     """Run the scraper pipeline asynchronously."""
     scraper = FundaScraperPipeline()

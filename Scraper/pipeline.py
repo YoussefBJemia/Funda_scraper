@@ -9,6 +9,7 @@ from Scraper.collector import Collector
 from Scraper.scraper import Scraper
 from Scraper.utils import QueryUtils, CleanerUtils
 from Scraper.config import Config
+import sys
 
 class FundaScraperPipeline:
     def __init__(self, base_dir=None):
@@ -34,22 +35,58 @@ class FundaScraperPipeline:
         with open(f'{output_dir}/{house_id}.json', 'w') as outfile:
             json.dump(house_info, outfile)
 
+    def print_progress_bar(self, current, total, prefix='', suffix='', length=50, fill='█'):
+        percent = ("{0:.1f}").format(100 * (current / float(total)))
+        filled_length = int(length * current // total)
+        bar = fill * filled_length + '-' * (length - filled_length)
+        sys.stdout.write(f'\r{prefix} |{bar}| {percent}% {suffix}')
+        sys.stdout.flush()
+        if current == total:
+            sys.stdout.write('\n')
+
     async def process_and_save(self, url, session):
+        # First, collect all the links
+        print("📋 Collecting house listings...")
         result = await self.collector.fetch_house_links_from_multiple_pages_async(url, session)
         unscraped_links = list(result)
-
-        scraped_data = await self.scraper.process_multiple_houses(unscraped_links, session, batch_size=10)
-
+        print(f"🔍 Found {len(unscraped_links)} listings to process")
+        
+        # Setup for progress tracking
+        houses_saved = 0
+        total_links = len(unscraped_links)
+        
+        # Process houses in batches, with progress updates
+        batch_size = 10
+        scraped_data = []
+        
+        for i in range(0, total_links, batch_size):
+            batch = unscraped_links[i:i+batch_size]
+            batch_results = await self.scraper.process_multiple_houses(batch, session, batch_size)
+            scraped_data.extend(batch_results)
+            
+            # Update progress
+            progress = min(i + batch_size, total_links)
+            self.print_progress_bar(progress, total_links, 
+                                    prefix=f'Progress:', 
+                                    suffix=f'({progress}/{total_links})')
+        
+        # Save the new houses
         houses_to_save = [house for house in scraped_data if house["ID"] not in self.scraped_ids]
-
-        for new_house in houses_to_save:
+        
+        print(f"\n💾 Saving {len(houses_to_save)} new properties...")
+        for i, new_house in enumerate(houses_to_save):
             self.save_house_data(new_house)
             self.scraped_ids.add(new_house["ID"])
+            houses_saved += 1
+            
+            # Update save progress
+            self.print_progress_bar(i + 1, len(houses_to_save), 
+                                   prefix='Saving:', 
+                                   suffix=f'({i+1}/{len(houses_to_save)})')
 
-        return len(houses_to_save), len(unscraped_links)
+        return houses_saved, len(unscraped_links)
 
     async def run(self):
-        print(f"search queries is {self.search_queries}")
         total_start_time = time.time()
         print("🏠 Starting Funda housing data collection...")
 
@@ -60,12 +97,10 @@ class FundaScraperPipeline:
             params = {k: v for k, v in self.search_query.items() if k != 'selected_area'}
             total_houses_saved = 0
             areas_processed = 0
-            print(f"search query is {self.search_query}\nparams is {params}")
 
             for area in self.search_queries:
                 area_start_time = time.time()
                 url = self.url_builder.build_url(selected_area=area, **params)
-                print(f"url is {url}")
                 number_observations = self.url_builder.get_number_results(url)
                 print(f"\n📍 Area: {area} - {number_observations} listings found")
 
