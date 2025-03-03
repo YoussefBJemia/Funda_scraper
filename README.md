@@ -29,3 +29,14 @@ cd Funda_scraper
 pip install -r requirements.txt
 python Funda_scraper/main.py
 ````
+
+---
+
+## 🚀 Usage
+
+1. **Start Scraping**:
+   Run the main script to begin scraping:
+   ````
+   python main.py
+   ````
+   
