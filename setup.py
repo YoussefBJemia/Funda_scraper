@@ -13,10 +13,14 @@ def get_requirements(file_path:str):
 
         
 setup(
-    name = 'Funda_scraper',
-    version = '0.0.1',
-    author = 'YBJ',
-    author_email = 'y.benjemia@tilburguniversity.edu',
-    packages = find_packages(),
-    install_requires = get_requirements('requirements.txt')
+    name='Funda_scraper',
+    version='0.0.1',
+    author='YBJ',
+    packages=find_packages(),
+    install_requires=get_requirements('requirements.txt'),
+    entry_points={
+        'console_scripts': [
+            'funda-scraper = main:main_function',
+        ],
+    },
 )

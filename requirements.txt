@@ -1,3 +1,8 @@
+setuptools
 pandas
-seaborn
+curl-cffi
+lxml
+beautifulsoup4
+python-dateutil
+requests
 -e .

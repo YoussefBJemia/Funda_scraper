@@ -793,7 +793,7 @@ def create_buttons(parent, root_window):
 
 def setup_gui(root, user_choice_continue):
     root.title("Housing Website Scraper")
-    root.geometry("700x750")
+    root.geometry("600x800")
     load_location_data()
     root.protocol("WM_DELETE_WINDOW", lambda: close_and_cleanup(root))
     

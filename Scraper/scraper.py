@@ -161,7 +161,7 @@ class Scraper:
             house_info["link"] = url
             house_info["ID"] = int(url.strip("/").split("/")[-1])
             #clean_scraped_record(house_info)  # This is imported directly from cleaner module
-            return clean_scraped_record(house_info)
+            return CleanerUtils.clean_scraped_record(house_info)
         return None
 
     # 4. Async Methods
