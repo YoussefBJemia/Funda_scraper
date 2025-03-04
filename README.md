@@ -27,7 +27,7 @@
 git clone https://github.com/YoussefBJemia/Funda_scraper
 cd Funda_scraper
 pip install -r requirements.txt
-python Funda_scraper/main.py
+python main.py
 ````
 
 ---
