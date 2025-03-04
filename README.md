@@ -39,7 +39,7 @@ python Funda_scraper/main.py
    ````
    python main.py
    ````
-   This will launch the Graphical User Interface (GUI).
+   This will launch the GUI.
 
    ![Interface Screenshot](Img/interface.PNG)
 2. **Start Scraping**
