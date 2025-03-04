@@ -1,6 +1,6 @@
 # 🏠 Funda_Scraper
 
-**Funda_Scraper** is your go-to tool for scraping housing data from **Funda**, the Dutch real estate platform. Whether you're looking for properties **for sale** or **for rent**, or exploring historical housing trends from the past few years, Funda_Scraper makes it simple and (hopefully) efficient.
+**Funda_Scraper** is your go-to tool for scraping housing data from **Funda**, the Dutch real estate platform.
 
 ---
 
