@@ -15,7 +15,7 @@
 ## ✨ Features
 
 - **Asynchronous Programming with asyncio**:
-  - Leverages Python's async capabilities for lightning-fast data collection.
+  - Leverages Python's async capabilities for faster data collection.
   - Runs multiple web requests concurrently instead of waiting for each request to complete.
   - Significantly reduces total scraping time compared to traditional sequential approaches.
 
@@ -27,10 +27,10 @@
   - Control the number of ads processed simultaneously.
   - Fine-tune performance vs. risk of IP blocking.
 
-User-Friendly Features:
-- Automatic progress saving.
-- Intuitive graphical interface.
-- Seamless pause and resume functionality.
+- **User-Friendly Features**:
+  - Automatic progress saving.
+  - Intuitive graphical interface.
+  - Seamless pause and resume functionality.
 
 ---
 
