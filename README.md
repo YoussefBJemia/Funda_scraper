@@ -14,9 +14,23 @@
 
 ## ✨ Features
 
-- **Asynchronous Scraping**: Utilizes `asyncio` for concurrent web requests, combined with `curl_cffi` for undetected scraping.
-- **Scraping by Batch**: Control how many ads are processed at once by adjusting `self.batch_processing_size` in `Scraper/config.py`. Increase the number for faster scraping, but be cautious—larger batches may increase the risk of your IP getting blocked.
-- **User-Friendly Interface**: An intuitive interface within the code for easy configuration and execution.
+- **Asynchronous Programming with asyncio**:
+  - Leverages Python's async capabilities for lightning-fast data collection.
+  - Runs multiple web requests concurrently instead of waiting for each request to complete.
+  - Significantly reduces total scraping time compared to traditional sequential approaches.
+
+- **Stealthy Scraping with curl_cffi**:
+  - Bypasses basic web scraping detection mechanisms.
+  - Provides a more robust way to fetch data without triggering anti-scraping protections.
+
+- **Flexible Batch Processing**:
+  - Control the number of ads processed simultaneously.
+  - Fine-tune performance vs. risk of IP blocking.
+
+User-Friendly Features:
+- Automatic progress saving.
+- Intuitive graphical interface.
+- Seamless pause and resume functionality.
 
 ---
 
